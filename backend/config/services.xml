@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="false" autoconfigure="false" public="true"/>
+
+        <service id="app.controller.auth" class="App\Controller\AuthController">
+            <argument type="service" id="app.repository.user" />
+            <argument type="service" id="security.password_encoder" />
+            <argument type="service" id="lexik_jwt_authentication.encoder" />
+        </service>
+
+        <service id="app.controller.movie" class="App\Controller\MovieController">
+            <argument type="service" id="app.repository.movie" />
+        </service>
+
+        <service id="app.controller.rental" class="App\Controller\RentalController">
+            <argument type="service" id="app.repository.movie" />
+            <argument type="service" id="app.repository.rental" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="app.fixture.app" class="App\DataFixtures\AppFixtures">
+            <argument type="service" id="security.password_encoder" />
+            <argument type="service" id="http_client"/>
+
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
+        <service id="app.repository.movie" class="App\Repository\MovieRepository">
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <service id="app.repository.rental" class="App\Repository\RentalRepository">
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <service id="app.repository.user" class="App\Repository\UserRepository">
+            <argument type="service" id="doctrine" />
+        </service>
+    </services>
+</container>

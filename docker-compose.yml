@@ -1,0 +1,75 @@
+version: "3.7"
+
+services:
+    php-fpm:
+        build:
+            context: ./backend/
+            dockerfile: ./docker/php-fpm/Dockerfile
+            target: dev
+        image: agilis_php-fpm
+        restart: unless-stopped
+        container_name: agilis_php-fpm
+        environment:
+            APP_SECRET: T0pS3cret
+            MYSQL_HOST: database
+            MYSQL_DATABASE: database
+            MYSQL_USER: agilis
+            MYSQL_PASSWORD: password
+        depends_on:
+            - database
+        networks:
+            - agilis_backend
+        volumes:
+            - ./backend/:/app:cached
+
+    nginx:
+        image: nginx:1.19-alpine
+        restart: unless-stopped
+        container_name: agilis_nginx
+        depends_on:
+            - php-fpm
+        ports:
+            - "8080:8080"
+        expose:
+            - "8080"
+        networks:
+            - agilis_backend
+            - agilis_service
+        volumes:
+            - ./backend/:/app:cached
+            - ./backend/docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:cached
+
+    database:
+        image: mysql:5.7
+        restart: unless-stopped
+        container_name: agilis_database
+        environment:
+            MYSQL_ROOT_PASSWORD: "password"
+            MYSQL_DATABASE: "database"
+            MYSQL_USER: "agilis"
+            MYSQL_PASSWORD: "password"
+        ports:
+            - "3306:3306"
+        networks:
+            - agilis_backend
+
+    frontend:
+        build:
+            context: ./frontend/
+            dockerfile: ./Dockerfile
+        image: agilis_frontend
+        restart: unless-stopped
+        container_name: agilis_frontend
+        depends_on:
+            - nginx
+        ports:
+            - "3000:3000"
+        networks:
+            - agilis_service
+networks:
+    agilis_backend:
+        name: agilis_backend
+        driver: bridge
+    agilis_service:
+        name: agilis_service
+        driver: bridge

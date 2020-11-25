@@ -1,0 +1,34 @@
+api_login_check:
+    path: /api/login_check
+    methods: [ POST ]
+    controller: app.controller.auth::createToken
+
+api_movies_list:
+    path: /api/movies
+    methods: [ GET ]
+    controller: app.controller.movie::index
+
+api_movies_rent:
+    path: /api/movies/{movie}/rent
+    methods: [ POST ]
+    controller: app.controller.rental::rent
+
+api_rentals_list:
+    path: /api/rentals
+    methods: [ GET ]
+    controller: app.controller.rental::index
+
+api_rentals_renew:
+    path: /api/rentals/{rental}/renew
+    methods: [ POST ]
+    controller: app.controller.rental::renew
+
+api_rentals_statistics_by_movie:
+    path: /api/statistics/by-movie
+    methods: [ GET ]
+    controller: app.controller.rental::statisticsByMovie
+
+api_retnals_statistics_weekly:
+    path: /api/statistics/weekly
+    methods: [ GET ]
+    controller: app.controller.rental::statisticsWeekly
