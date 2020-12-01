@@ -2,7 +2,6 @@
 
 DVD kölcsönző csapat feladat.
 
-=======
 Belépés a php dockerbe
 ```shell script
 docker exec -it agilis_php-fpm /bin/sh
