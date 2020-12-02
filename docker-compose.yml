@@ -53,19 +53,19 @@ services:
         networks:
             - agilis_backend
 
-    frontend:
-        build:
-            context: ./frontend/
-            dockerfile: ./Dockerfile
-        image: agilis_frontend
-        restart: unless-stopped
-        container_name: agilis_frontend
-        depends_on:
-            - nginx
-        ports:
-            - "3000:3000"
-        networks:
-            - agilis_service
+#    frontend:
+#        build:
+#            context: ./frontend/
+#            dockerfile: ./Dockerfile
+#        image: agilis_frontend
+#        restart: unless-stopped
+#        container_name: agilis_frontend
+#        depends_on:
+#            - nginx
+#        ports:
+#            - "3000:3000"
+#        networks:
+#            - agilis_service
 networks:
     agilis_backend:
         name: agilis_backend

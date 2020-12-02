@@ -24,6 +24,7 @@ class MovieController
     {
         /** @var array|Movie[] $movies */
         $movies = $this->movieRepository->findAll();
+
         $response = array_map(static function (Movie $movie) {
             return [
                 'id' => $movie->getId(),

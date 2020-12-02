@@ -11,10 +11,9 @@ use App\Repository\MovieRepository;
 use App\Repository\RentalRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class RentalController
@@ -65,6 +64,10 @@ class RentalController
         /** @var Movie $movie */
         $movie = $this->movieRepository->find((int) $movie);
 
+        if ($movie === null) {
+            throw new BadRequestHttpException('Invalid movie');
+        }
+
         $rental = new Rental();
         $rental->setUser($this->tokenStorage->getToken()->getUser());
         $rental->setMovie($movie);
@@ -83,13 +86,17 @@ class RentalController
     public function renew($rental): Response
     {
         /** @var Rental $rental */
-        $rental = $this->rentalRepository->find($rental);
+        $rental = $this->rentalRepository->find((int) $rental);
+
+        if ($rental === null) {
+            throw new BadRequestHttpException('Invalid rental');
+        }
 
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
         if ($user->getId() !== $rental->getUser()->getId()) {
-            throw new RuntimeException('Cannot renew someone else\'s rental');
+            throw new BadRequestHttpException('Cannot renew someone else\'s rental');
         }
 
         $rental->setExpiredAt(new DateTime('+1 week'));
