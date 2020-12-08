@@ -1,0 +1,2 @@
+(this["webpackJsonpdvd-rental"]=this["webpackJsonpdvd-rental"]||[]).push([[0],{10:function(n,e,t){},11:function(n,e,t){"use strict";t.r(e);var o=t(1),a=t.n(o),c=t(3),r=t.n(c);t(8),t(0),t.p,t(10);var i=function(n){n&&n instanceof Function&&t.e(3).then(t.bind(null,12)).then((function(e){var t=e.getCLS,o=e.getFID,a=e.getFCP,c=e.getLCP,r=e.getTTFB;t(n),o(n),a(n),c(n),r(n)}))},l=a.a.createElement("h1",{className:"greeting"},"Hello, world!");r.a.render(l,document.getElementById("root")),i()},8:function(n,e,t){}},[[11,1,2]]]);
+//# sourceMappingURL=main.1e14b155.chunk.js.map
