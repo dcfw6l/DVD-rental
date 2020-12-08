@@ -1,0 +1,49 @@
+.homeContainer{ 
+
+    width:100%; 
+    background-color: gray; 
+    text-align: left;  
+    color:black; 
+    font-size:14pt; 
+
+} 
+
+.ProductCard{
+    padding:10px; 
+    width: 395px; 
+    height:250px; 
+    background-color: lightgray;  
+    border:2px solid black;  
+    border-radius: 10px;   
+    margin:15px;   
+    display:inline-block;   
+    cursor: pointer;
+    font-weight: 450;
+
+    
+    } 
+    
+    .ProductCard:hover{  
+        background-color:rgb(71, 73, 75);  
+    } 
+
+    .ProductImage{
+        padding-top: 5px;
+        max-width: 150px;
+    }
+
+    .ProductCardLink{
+        text-decoration: underline;
+        color: black;
+        font-family: Helvetica;
+        font-size: 20px;
+        padding-left: 110px;
+    }
+  
+.bold{
+    font-weight: bold;
+}
+
+.lightbold {
+    font-weight: 500;
+}
