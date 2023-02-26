@@ -21,7 +21,7 @@ function App() {
       <Link className="menuItems" to="/Contact"> Kapcsolat</Link>
       
       <Route exact path="/" component={() => <Home />} />
-      {/* <Route exact path="/Products" component={() => <Products />} /> */}
+      <Route exact path="/Products" component={() => <Products />} />
       <Route exact path="/Contact" component={() => <Contact />} />
         
       </Router>
